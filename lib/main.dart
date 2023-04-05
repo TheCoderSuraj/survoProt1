@@ -6,6 +6,7 @@ import 'package:survo_protv1/core/general/providers/data_provider.dart';
 import 'package:survo_protv1/core/user/screens/user_home_screen.dart';
 
 import 'core/general/screens/home_screen.dart';
+import 'core/superviser/screens/super_home_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -30,7 +31,7 @@ class SurvoProt1App extends StatelessWidget {
   Widget build(BuildContext context) {
     return OKToast(
       child: MaterialApp(
-        home: UserHomeScreen(),
+        home: SuperHomeScreen(),
       ),
     );
   }

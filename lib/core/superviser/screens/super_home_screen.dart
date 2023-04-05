@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:survo_protv1/core/server/functions/account/account_api.dart';
+import 'package:survo_protv1/core/server/functions/location/location_api.dart';
 import 'package:survo_protv1/core/superviser/screens/add_user_screen.dart';
 import 'package:survo_protv1/core/superviser/screens/surveillance_screen.dart';
 import 'package:survo_protv1/utils/constants.dart';
@@ -15,7 +17,14 @@ class SuperHomeScreen extends StatelessWidget {
         title: const Text("$kAppName Super"),
       ),
       body: ScreenPageSetup(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          ActionButton(
+            title: "Test",
+            onPressed: () {
+              FirebaseLocationApi.testCall();
+            },
+          ),
           ActionButton(
             title: "Add user",
             onPressed: () {

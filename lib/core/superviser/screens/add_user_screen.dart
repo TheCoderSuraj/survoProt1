@@ -32,12 +32,18 @@ class _AddUserScreenState extends State<AddUserScreen> {
       return;
     }
     AccountModel ac = AccountModel(
+      id: _idController.text,
       name: _nameController.text,
       baseLocation: LocationModel(lat: lat, lon: lon),
       allowedDistance: lim,
     );
 
-    AccountApi.addAccount(ac);
+    AccountApi.addAccount(ac, onSuccess: () {
+      showMyToast("Account added successfully");
+      Navigator.pop(context);
+    }, onError: (e) {
+      showMyToast(e, isError: true);
+    });
   }
 
   @override

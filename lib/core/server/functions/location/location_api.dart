@@ -4,7 +4,17 @@ import '../../models/location_model.dart';
 import '../../server_constant.dart';
 
 class FirebaseLocationApi {
-  void addLocation(
+  static void testCall() {
+    print("Test call");
+    addLocation(
+        LocationModel(
+          lat: 12.21,
+          lon: 32.32,
+        ),
+        "123");
+  }
+
+  static void addLocation(
     LocationModel loc,
     String id, {
     Function()? onSuccess,
@@ -28,7 +38,7 @@ class FirebaseLocationApi {
     }
   }
 
-  Future<LocationModel?> getCurrentLocation(
+  static Future<LocationModel?> getCurrentLocation(
     String id, {
     Function()? onSuccess,
     Function(String error)? onError,
@@ -56,7 +66,7 @@ class FirebaseLocationApi {
     return loc;
   }
 
-  Future<Stream<QuerySnapshot<Map<String, dynamic>>>>
+  static Future<Stream<QuerySnapshot<Map<String, dynamic>>>>
       getCurrentLocationSnapshot(String id) async {
     return FirebaseFirestore.instance
         .collection(skAccountCollectionName)
