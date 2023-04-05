@@ -1,44 +1,8 @@
 import 'package:flutter/painting.dart';
 
 const kPagePadding = EdgeInsets.all(10);
-const kAppName = "Meme Life";
-const kMinAppUpgraderVersion = "1.4.0";
-const kAppPlayStoreLink =
-    "https://play.google.com/store/apps/details?id=com.codykas.memelife";
-const kPlayStoreDashboardLink =
-    "https://play.google.com/store/apps/dev?id=8059038717375510913";
-
-const kListOfSubredditLink =
-    "https://www.reddit.com/r/ListOfSubreddits/wiki/listofsubreddits/";
-const kRedditListLink = "https://redditlist.com/";
-const kFeedbackFormLink =
-    "https://docs.google.com/forms/d/e/1FAIpQLSf-YeVz_BfyfaHWDoP2gkZ6CYjhvvPuLZ0MMkXIoFc0IovNtA/viewform?usp=sf_link";
-const kNoAd = false;
-const kIsPremium = false;
-const kRewardTimeInMin = 360; // 6 * 60
-const kHistoryBoxHiveBox = "HistoryHiveBox";
-const kFavoriteMemeHiveBox = "FavoriteMemeHiveBox";
-
-const kMaxFavMemesLimit = 50;
-const kMaxFavHistoryLimit = 50;
-
-// shared pref ids
-const kOnlySafeContentPrefBoolId = "Only Safe Content prefBool id";
-const kFirstTimeUserPrefBoolId = "First Time User prefBool id";
-const kAlwaysMutePrefBoolId = "Always Mute prefBool id";
-const kAutoPlayPrefBoolId = "Auto Play prefBool id";
-const kQuickAccessPrefIntId = "Quick Access prefInt id";
-const kNoAdRewardTimePrefIntId = "No Ad Reward Time prefInt id";
-const kVisualQualityDataPrefIntId = "Visual Quality Data prefInt id";
-const kVisualQualityWifiPrefIntId = "Visual Quality Wifi prefInt id";
-const kLastSubredditNamePrefStringId = "Last Subreddit Name prefString id";
-const kLoginEmailPrefStringId = "Login Email Pref String Id";
-const kLoginPasswordPrefStringId = "Login Password Pref String Id";
-
-const kTotalQuickAccessOpts = 3;
-const kQuickAccessLimit = 10;
-const kAuthPagePadding = kPagePadding;
-// const kTotalVisualQualityOpts = ;
+const kAppName = "Survo Prototype";
+const kIsSupervisor = false;
 
 // colors
 // const kHighLightColor = Color(0x99C3F8FF);

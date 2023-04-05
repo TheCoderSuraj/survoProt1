@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1073838987408",
+    "project_id": "survoprot",
+    "storage_bucket": "survoprot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073838987408:android:4d15e10163ffd42dc76015",
+        "android_client_info": {
+          "package_name": "com.example.survo_protv1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1073838987408-chetfa61ccbk1c0jhqvlhrbbkg2m5fu6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBALNbn3j-Dsn9KuiqSpokGkiUgk_FZlAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1073838987408-chetfa61ccbk1c0jhqvlhrbbkg2m5fu6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,12 +6,12 @@ class ScreenPageSetup extends StatelessWidget {
     Key? key,
     this.children = const <Widget>[],
     this.crossAxisAlignment = CrossAxisAlignment.start,
-    required EdgeInsets padding,
+    this.padding = kPagePadding,
   }) : super(key: key);
 
   final List<Widget> children;
   final CrossAxisAlignment crossAxisAlignment;
-
+  final EdgeInsets padding;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,7 +23,7 @@ class ScreenPageSetup extends StatelessWidget {
             ),
             child: IntrinsicHeight(
               child: Padding(
-                padding: kPagePadding,
+                padding: padding,
                 child: Column(
                   crossAxisAlignment: crossAxisAlignment,
                   children: children,
