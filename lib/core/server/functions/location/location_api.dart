@@ -52,6 +52,7 @@ class FirebaseLocationApi {
           .collection(skAccountCollectionName)
           .doc(id)
           .collection(skLocationCollectionName)
+          .orderBy('time', descending: true)
           .limit(1)
           .get()
           .then((value) {

@@ -1,3 +1,4 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:survo_protv1/core/server/models/location_model.dart';
 
 class AccountModel {
@@ -7,12 +8,14 @@ class AccountModel {
     required this.allowedDistance,
     this.isActive = false,
     this.id = "",
+    this.lastLoc,
   });
   late String id;
   late String name;
   late LocationModel baseLocation;
   late double allowedDistance;
   late bool isActive;
+  LatLng? lastLoc;
 
   AccountModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

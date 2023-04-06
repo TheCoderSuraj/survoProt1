@@ -1,8 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 import 'package:survo_protv1/core/general/providers/data_provider.dart';
+import 'package:survo_protv1/core/server/models/account_model.dart';
+import 'package:survo_protv1/core/server/models/location_model.dart';
+import 'package:survo_protv1/core/superviser/screens/user_details_screen.dart';
 import 'package:survo_protv1/core/user/screens/user_home_screen.dart';
 
 import 'core/general/screens/home_screen.dart';
@@ -43,10 +47,19 @@ class _SurvoProt1AppState extends State<SurvoProt1App> {
 
   @override
   Widget build(BuildContext context) {
-    return const OKToast(
+    return OKToast(
       child: MaterialApp(
         // home: UserHomeScreen(),
         home: SuperHomeScreen(),
+        //     home: UserDetailsScreen(
+        //   am: AccountModel(
+        //     id: "2458",
+        //     name: "see",
+        //     baseLocation: LocationModel(lat: 123.12, lon: 32.32),
+        //     allowedDistance: 200,
+        //     lastLoc: LatLng(123.01, 32.22),
+        //   ),
+        // )
         // home: MapScreen(),
       ),
     );

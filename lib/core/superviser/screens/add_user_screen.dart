@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:survo_protv1/core/server/functions/account/account_api.dart';
 import 'package:survo_protv1/core/server/models/account_model.dart';
 import 'package:survo_protv1/core/server/models/location_model.dart';
+import 'package:survo_protv1/core/superviser/providers/superviser_provider.dart';
 import 'package:survo_protv1/core/superviser/screens/map_screen.dart';
 import 'package:survo_protv1/utils/common_methods.dart';
 import 'package:survo_protv1/widgets/action_button.dart';
@@ -43,6 +45,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
 
     AccountApi.addAccount(ac, onSuccess: () {
       showMyToast("Account added successfully");
+      context.read<SupervisorProvider>().addUser(ac);
       Navigator.pop(context);
     }, onError: (e) {
       showMyToast(e, isError: true);
