@@ -1,8 +1,0 @@
-type 
-    category
-        subcategory
-            ->title | Description
-            ->title | Description
-            ->title | Description
-            ->title | Description
-            ->title | Description

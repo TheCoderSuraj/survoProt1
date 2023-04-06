@@ -6,12 +6,12 @@ import '../../server_constant.dart';
 class FirebaseLocationApi {
   static void testCall() {
     print("Test call");
-    addLocation(
-        LocationModel(
-          lat: 12.21,
-          lon: 32.32,
-        ),
-        "123");
+    // addLocation(
+    //     LocationModel(
+    //       lat: 12.21,
+    //       lon: 32.32,
+    //     ),
+    //     "123");
   }
 
   static void addLocation(
@@ -21,17 +21,20 @@ class FirebaseLocationApi {
     Function(String error)? onError,
   }) async {
     try {
+      Map<String, dynamic> value = loc.toJson();
+      value.remove('time');
+      value['time'] = FieldValue.serverTimestamp();
       FirebaseFirestore.instance
           .collection(skAccountCollectionName)
           .doc(id)
           .collection(skLocationCollectionName)
           .doc()
-          .set(loc.toJson());
+          .set(value);
       if (onSuccess != null) {
         onSuccess();
       }
     } catch (e) {
-      debugPrint("Add account error: $e");
+      debugPrint("Add Location error: $e");
       if (onError != null) {
         onError(e.toString());
       }
@@ -58,10 +61,10 @@ class FirebaseLocationApi {
             onSuccess();
           }
         }
-        debugPrint("Get account error: null value");
+        debugPrint("Get location error: null value");
       });
     } catch (e) {
-      debugPrint("get account error: $e");
+      debugPrint("get location error: $e");
     }
     return loc;
   }

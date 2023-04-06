@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:survo_protv1/core/server/functions/account/account_api.dart';
 import 'package:survo_protv1/core/server/models/account_model.dart';
 import 'package:survo_protv1/core/server/models/location_model.dart';
+import 'package:survo_protv1/core/superviser/screens/map_screen.dart';
 import 'package:survo_protv1/utils/common_methods.dart';
 import 'package:survo_protv1/widgets/action_button.dart';
 import 'package:survo_protv1/widgets/input_field.dart';
@@ -46,6 +49,40 @@ class _AddUserScreenState extends State<AddUserScreen> {
     });
   }
 
+  void selectLocationFromMap(LatLng loc) async {
+    print("call for map location");
+    LatLng? t = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: ((context) => MapScreen(
+                  initialLocation: loc,
+                )))) as LatLng?;
+    if (t != null) {
+      setState(() {
+        _latController.text = t.latitude.toString();
+        _lonController.text = t.longitude.toString();
+      });
+    }
+  }
+
+  Future<LatLng?> askLocation() async {
+    LatLng? res;
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      print("We need location permission");
+      await Geolocator.requestPermission();
+    } else {
+      Position curPosition = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.best);
+      print("latitude: ${curPosition.latitude}");
+      print("longitude: ${curPosition.longitude}");
+      res = LatLng(curPosition.latitude, curPosition.longitude);
+    }
+    return res;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +90,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
         title: const Text("Add User"),
       ),
       body: ScreenPageSetup(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           InputField(
             labelText: "Id",
@@ -85,6 +123,16 @@ class _AddUserScreenState extends State<AddUserScreen> {
               ),
             ],
           ),
+          const SizedBox(height: 10),
+          ActionButton(
+              title: "Select from Map",
+              onPressed: () async {
+                LatLng? l = await askLocation();
+                print("location we got $l");
+                if (l != null) {
+                  selectLocationFromMap(l);
+                }
+              }),
           const SizedBox(height: 15),
           InputField(
             labelText: "Allowed Distance",
@@ -92,6 +140,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
             keyboardType: TextInputType.number,
           ),
           const SizedBox(height: 15),
+          const Spacer(),
           ActionButton(title: "Add User", onPressed: addUser),
           const SizedBox(height: 25),
         ],

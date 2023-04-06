@@ -17,7 +17,9 @@ class AccountApi {
     //         allowedDistance: 500), onSuccess: () {
     //   print("Account added successfully");
     // });
-    AccountModel? ac = await getAccount("123");
+    // AccountModel? ac = await getAccount("123");
+    List<AccountModel> accounts = await getAllAccount();
+    print("We got ${accounts.length} users details");
   }
 
   static void addAccount(
@@ -42,6 +44,36 @@ class AccountApi {
       }
     } else {
       const error = "Add account error: Account Id already exists";
+      debugPrint(error);
+      if (onError != null) {
+        onError(error);
+      }
+    }
+  }
+
+  static void updateAccount(
+    String id,
+    Map<String, dynamic> value, {
+    Function()? onSuccess,
+    Function(String error)? onError,
+  }) async {
+    if (await checkIfAccountExists(id)) {
+      try {
+        FirebaseFirestore.instance
+            .collection(skAccountCollectionName)
+            .doc(id)
+            .update(value);
+        if (onSuccess != null) {
+          onSuccess();
+        }
+      } catch (e) {
+        debugPrint("update account error: $e");
+        if (onError != null) {
+          onError(e.toString());
+        }
+      }
+    } else {
+      const error = "update account error: Account Id does not exist";
       debugPrint(error);
       if (onError != null) {
         onError(error);
@@ -111,5 +143,29 @@ class AccountApi {
       }
     }
     return ac;
+  }
+
+  static Future<List<AccountModel>> getAllAccount({
+    Function()? onSuccess,
+    Function(String error)? onError,
+  }) async {
+    List<AccountModel> res = [];
+    try {
+      await FirebaseFirestore.instance
+          .collection(skAccountCollectionName)
+          .get()
+          .then((value) {
+        for (var v in value.docs) {
+          AccountModel ac = AccountModel.fromJson(v.data());
+          res.add(ac);
+        }
+      });
+    } catch (e) {
+      debugPrint("get account error: $e");
+      if (onError != null) {
+        onError(e.toString());
+      }
+    }
+    return res;
   }
 }

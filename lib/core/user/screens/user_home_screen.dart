@@ -4,7 +4,10 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:survo_protv1/core/general/providers/data_provider.dart';
+import 'package:survo_protv1/core/server/functions/location/location_api.dart';
 import 'package:survo_protv1/core/server/models/location_model.dart';
+import 'package:survo_protv1/core/superviser/providers/superviser_provider.dart';
+import 'package:survo_protv1/utils/common_methods.dart';
 import 'package:survo_protv1/utils/constants.dart';
 import 'package:survo_protv1/widgets/screen_page_setup.dart';
 
@@ -75,6 +78,11 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                 } else {
                   print("You are inside ");
                 }
+                FirebaseLocationApi.addLocation(cur, "3353", onSuccess: () {
+                  showMyToast("location added");
+                }, onError: (e) {
+                  showMyToast("error on adding location: $e");
+                });
               },
             ),
           )

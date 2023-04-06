@@ -5,18 +5,21 @@ class AccountModel {
     required this.name,
     required this.baseLocation,
     required this.allowedDistance,
+    this.isActive = false,
     this.id = "",
   });
   late String id;
   late String name;
   late LocationModel baseLocation;
   late double allowedDistance;
+  late bool isActive;
 
   AccountModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     baseLocation = LocationModel.fromJson(json['baseLocation']);
     allowedDistance = json['allowedDistance'];
+    isActive = json['isActive'];
   }
 
   Map<String, dynamic> toJson() {
@@ -25,6 +28,7 @@ class AccountModel {
     data['name'] = name;
     data['baseLocation'] = baseLocation.toJson();
     data['allowedDistance'] = allowedDistance;
+    data['isActive'] = isActive;
     return data;
   }
 }
