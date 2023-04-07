@@ -5,14 +5,17 @@ class UserStatusElement extends StatelessWidget {
   const UserStatusElement({
     super.key,
     required this.ac,
+    this.onPressed,
   });
   final AccountModel ac;
+  final Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2),
       child: ListTile(
+        onTap: onPressed,
         tileColor: ac.isActive ? Colors.green[200] : Colors.red[200],
         leading: const Icon(Icons.person),
         title: Text(ac.name),

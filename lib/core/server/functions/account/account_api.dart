@@ -51,7 +51,7 @@ class AccountApi {
     }
   }
 
-  static void updateAccount(
+  static Future<void> updateAccount(
     String id,
     Map<String, dynamic> value, {
     Function()? onSuccess,

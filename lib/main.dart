@@ -13,6 +13,7 @@ import 'core/general/screens/home_screen.dart';
 import 'core/superviser/providers/superviser_provider.dart';
 import 'core/superviser/screens/map_screen.dart';
 import 'core/superviser/screens/super_home_screen.dart';
+import 'core/user/providers/user_provider.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -25,6 +26,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => DataProvider()),
         ChangeNotifierProvider(create: (context) => SupervisorProvider()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
       child: const SurvoProt1App(),
     ),

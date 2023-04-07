@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:survo_protv1/core/server/models/account_model.dart';
 import 'package:survo_protv1/core/server/models/location_model.dart';
 import 'package:survo_protv1/core/superviser/providers/superviser_provider.dart';
+import 'package:survo_protv1/core/superviser/screens/user_details_screen.dart';
 import 'package:survo_protv1/core/superviser/widegets/user_status_element.dart';
 import 'package:survo_protv1/utils/constants.dart';
 import 'package:survo_protv1/widgets/screen_page_setup.dart';
@@ -28,8 +29,18 @@ class _UserStatusScreenState extends State<UserStatusScreen> {
           padding: kPagePadding,
           child: Consumer<SupervisorProvider>(builder: (context, value, child) {
             return ListView.builder(
-              itemBuilder: (context, index) =>
-                  UserStatusElement(ac: value.users[index]),
+              itemBuilder: (context, index) => UserStatusElement(
+                ac: value.users[index],
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          UserDetailsScreen(am: value.users[index]),
+                    ),
+                  );
+                },
+              ),
               itemCount: value.users.length,
             );
           }),

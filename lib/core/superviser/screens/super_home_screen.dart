@@ -47,13 +47,13 @@ class SuperHomeScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(width: double.infinity),
-          ActionButton(
-            title: "Test",
-            onPressed: () {
-              // AccountApi.testCall();
-              testListen(context.read<SupervisorProvider>().users[0].id);
-            },
-          ),
+          // ActionButton(
+          //   title: "Test",
+          //   onPressed: () {
+          //     // AccountApi.testCall();
+          //     testListen(context.read<SupervisorProvider>().users[0].id);
+          //   },
+          // ),
           ActionButton(
             title: "Add user",
             onPressed: () {

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:survo_protv1/core/general/providers/data_provider.dart';
@@ -61,11 +62,14 @@ class _SurveillanceScreenState extends State<SurveillanceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Surveillance Screen"),
+        title: const Text("Surveillance Screen"),
       ),
       body: Consumer<SupervisorProvider>(builder: (context, value, child) {
         markers = {};
         for (var u in value.users) {
+          double dist = Geolocator.distanceBetween(u.baseLocation.lat,
+              u.baseLocation.lon, u.lastLoc!.latitude, u.lastLoc!.longitude);
+
           markers.add(
             Marker(
               markerId: MarkerId(u.id),
@@ -74,10 +78,14 @@ class _SurveillanceScreenState extends State<SurveillanceScreen> {
                   title: u.id,
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => UserDetailsScreen(am: u)));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UserDetailsScreen(am: u),
+                      ),
+                    );
                   }),
+              icon: BitmapDescriptor.defaultMarkerWithHue(
+                  (dist <= u.allowedDistance) ? 255 : 0),
             ),
           );
         }

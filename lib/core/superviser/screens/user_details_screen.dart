@@ -81,13 +81,25 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                 const SizedBox(
                   width: double.infinity,
                 ),
+                Text(widget.am.isActive ? "===ONLINE===" : "===OFFLINE==="),
                 Text(
                     "Base==> Lat: ${widget.am.baseLocation.lat} | Lon: ${widget.am.baseLocation.lon}"),
                 Text("Allowed Distance ==> ${widget.am.allowedDistance}"),
                 if (widget.am.lastLoc != null)
                   Text(
                       "Location==> Lat: ${widget.am.lastLoc!.latitude} | Lon: ${widget.am.lastLoc!.longitude}"),
-                if (widget.am.lastLoc != null) Text("Distance==> $dist")
+                if (widget.am.lastLoc != null) Text("Distance==> $dist"),
+                if (widget.am.lastLoc != null)
+                  Text(
+                    (dist <= widget.am.allowedDistance)
+                        ? "He is inside allowed area."
+                        : "He is outside allowed area.",
+                    style: kBoldTextStyle.copyWith(
+                      color: (dist <= widget.am.allowedDistance)
+                          ? Colors.green
+                          : Colors.red,
+                    ),
+                  ),
               ],
             ),
           ),
