@@ -8,6 +8,7 @@ import 'package:survo_protv1/core/server/models/location_model.dart';
 import 'package:survo_protv1/core/superviser/providers/superviser_provider.dart';
 import 'package:survo_protv1/core/superviser/screens/map_screen.dart';
 import 'package:survo_protv1/utils/common_methods.dart';
+import 'package:survo_protv1/utils/constants.dart';
 import 'package:survo_protv1/widgets/action_button.dart';
 import 'package:survo_protv1/widgets/input_field.dart';
 import 'package:survo_protv1/widgets/screen_page_setup.dart';
@@ -107,6 +108,11 @@ class _AddUserScreenState extends State<AddUserScreen> {
             keyboardType: TextInputType.name,
           ),
           const SizedBox(height: 15),
+          const Text(
+            "Base Location",
+            style: kSemiBoldTextStyle,
+          ),
+          const SizedBox(height: 5),
           Row(
             children: [
               Expanded(
@@ -130,6 +136,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
           ActionButton(
               title: "Select from Map",
               onPressed: () async {
+                showMyToast("getting your location for reference...");
                 LatLng? l = await askLocation();
                 print("location we got $l");
                 if (l != null) {

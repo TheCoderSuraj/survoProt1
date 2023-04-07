@@ -17,15 +17,20 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  LatLng _selectedLatLng = LatLng(123.12, 32.32);
+  LatLng _selectedLatLng = LatLng(0, 0);
 
   bool hasSelected = false;
+  @override
+  void initState() {
+    _selectedLatLng = widget.initialLocation;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Map"),
+        title: Text("Select Coordinates"),
       ),
       body: Column(
         children: [

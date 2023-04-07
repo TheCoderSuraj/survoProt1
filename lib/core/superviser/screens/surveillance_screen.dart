@@ -76,6 +76,8 @@ class _SurveillanceScreenState extends State<SurveillanceScreen> {
               position: u.lastLoc ?? LatLng(12.32, 32.32),
               infoWindow: InfoWindow(
                   title: u.id,
+                  snippet:
+                      u.isActive ? "${dist.toStringAsFixed(2)} M" : "OFFLINE",
                   onTap: () {
                     Navigator.push(
                       context,
@@ -84,8 +86,11 @@ class _SurveillanceScreenState extends State<SurveillanceScreen> {
                       ),
                     );
                   }),
-              icon: BitmapDescriptor.defaultMarkerWithHue(
-                  (dist <= u.allowedDistance) ? 255 : 0),
+              icon: BitmapDescriptor.defaultMarkerWithHue(!u.isActive
+                  ? 255
+                  : (dist <= u.allowedDistance)
+                      ? 100
+                      : 0),
             ),
           );
         }
@@ -95,7 +100,7 @@ class _SurveillanceScreenState extends State<SurveillanceScreen> {
           initialCameraPosition: CameraPosition(
             target: t,
             // target: LatLng(30.77225658, 76.5727657),
-            zoom: 10,
+            zoom: 15,
           ),
           markers: markers,
         );

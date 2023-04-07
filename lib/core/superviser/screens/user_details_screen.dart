@@ -91,13 +91,17 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
                 if (widget.am.lastLoc != null) Text("Distance==> $dist"),
                 if (widget.am.lastLoc != null)
                   Text(
-                    (dist <= widget.am.allowedDistance)
-                        ? "He is inside allowed area."
-                        : "He is outside allowed area.",
+                    !widget.am.isActive
+                        ? "He is OFFLINE."
+                        : (dist <= widget.am.allowedDistance)
+                            ? "He is inside allowed area."
+                            : "He is outside allowed area.",
                     style: kBoldTextStyle.copyWith(
-                      color: (dist <= widget.am.allowedDistance)
-                          ? Colors.green
-                          : Colors.red,
+                      color: !widget.am.isActive
+                          ? Colors.blue
+                          : (dist <= widget.am.allowedDistance)
+                              ? Colors.green
+                              : Colors.red,
                     ),
                   ),
               ],
